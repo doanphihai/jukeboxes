@@ -44,10 +44,12 @@ for juke in resp.json():
     for component in juke['components']:
         arr.append(component['name'])
     for s_id in settings.keys():
+        # If component set of jukebox is equals or greater than setting's required component
+        # then add a row for (setting,model,jukebox_id)
         intersect = settings[s_id].intersection(set(arr))
         len_required_component = len(settings[s_id])
         if (len(intersect) == len(settings[s_id])):
-            print(settings[s_id], set(arr), intersect)
+            #print(settings[s_id], set(arr), intersect)
             session.execute(
                 """
                 INSERT INTO juke_boxes (model, setting, id, components)
